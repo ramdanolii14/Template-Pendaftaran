@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel - Upload Dokumen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { gray: { 900: '#121212', 800: '#1e1e1e', 850: '#181818' } } }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-200 flex h-screen font-sans antialiased overflow-hidden">
+    <aside class="w-64 bg-gray-850 border-r border-gray-800 flex flex-col shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-800">
+            <h1 class="text-lg font-bold text-white tracking-wider">USER<span class="text-blue-500">PANEL</span></h1>
+        </div>
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <a href="#" class="block px-4 py-2.5 rounded-xl text-gray-400 hover:bg-gray-800 hover:text-gray-200 transition-colors">Dashboard</a>
+            <a href="#" class="block px-4 py-2.5 rounded-xl bg-blue-600/10 text-blue-400 font-medium transition-colors">Upload Dokumen</a>
+            <a href="#" class="block px-4 py-2.5 rounded-xl text-gray-400 hover:bg-gray-800 hover:text-gray-200 transition-colors">Pengaturan Akun</a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <header class="h-16 bg-gray-850/50 border-b border-gray-800 flex items-center justify-between px-8 backdrop-blur-sm z-10 shrink-0">
+            <h2 class="text-lg font-medium text-gray-100">Upload Dokumen Persyaratan</h2>
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-gray-400">ID: 1029</span>
+                <div class="w-8 h-8 rounded-full bg-gray-700 border border-gray-600 flex items-center justify-center text-xs">U</div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8 space-y-8">
+            <div class="max-w-4xl">
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-white">Dokumen Wajib</h3>
+                    <p class="text-sm text-gray-400 mt-1">Pastikan file sesuai format dan tidak melebihi batas ukuran.</p>
+                </div>
+
+                <form id="uploadForm" class="space-y-6">
+                    <div id="fileContainer" class="space-y-6">
+                        <div class="bg-gray-800 border border-gray-800/50 rounded-2xl p-6 shadow-sm">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-base font-medium text-gray-200 flex items-center gap-2">
+                                        Scan KTP / Paspor <span class="text-red-500">*</span>
+                                    </h4>
+                                    <p class="text-xs text-gray-500 mt-1">Pastikan foto jelas dan tidak buram. Format KTP harus asli.</p>
+                                    <div class="flex gap-3 mt-2 text-xs text-gray-400">
+                                        <span class="bg-gray-900 px-2 py-1 rounded">Maks: 2048 KB</span>
+                                        <span class="bg-gray-900 px-2 py-1 rounded">Format: PDF, JPG, PNG</span>
+                                    </div>
+                                </div>
+                                <span id="status-ktp" class="text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-gray-700 text-gray-400">Belum Ada</span>
+                            </div>
+
+                            <div class="relative border-2 border-gray-700 border-dashed rounded-xl hover:border-gray-500 hover:bg-gray-700/10 transition-all duration-200 p-6 flex flex-col justify-center group overflow-hidden min-h-[120px]">
+                                <input type="file" id="doc_ktp" accept=".pdf,.jpg,.jpeg,.png" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10 target-file" data-id="ktp" required>
+                                
+                                <div id="placeholder-ktp" class="text-center pointer-events-none transition-opacity">
+                                    <svg class="mx-auto h-8 w-8 text-gray-500 mb-2 group-hover:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                    <p class="text-sm text-gray-400 group-hover:text-gray-300">Pilih file atau drag ke sini</p>
+                                </div>
+
+                                <div id="preview-container-ktp" class="hidden w-full items-center gap-4 pointer-events-none z-20">
+                                    <div class="w-14 h-14 shrink-0 bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center border border-gray-700 shadow-inner">
+                                        <img id="preview-img-ktp" class="w-full h-full object-cover hidden" />
+                                        <span id="preview-icon-ktp" class="text-sm font-bold text-gray-500 hidden"></span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p id="preview-name-ktp" class="text-sm text-gray-100 truncate font-medium"></p>
+                                        <p id="preview-size-ktp" class="text-xs text-blue-400 mt-1"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 border border-gray-800/50 rounded-2xl p-6 shadow-sm">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-base font-medium text-gray-200 flex items-center gap-2">
+                                        Curriculum Vitae <span class="text-red-500">*</span>
+                                    </h4>
+                                    <p class="text-xs text-gray-500 mt-1">Upload CV terbaru format ATS friendly lebih disarankan.</p>
+                                    <div class="flex gap-3 mt-2 text-xs text-gray-400">
+                                        <span class="bg-gray-900 px-2 py-1 rounded">Maks: 5120 KB</span>
+                                        <span class="bg-gray-900 px-2 py-1 rounded">Format: PDF</span>
+                                    </div>
+                                </div>
+                                <span id="status-cv" class="text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-gray-700 text-gray-400">Belum Ada</span>
+                            </div>
+
+                            <div class="relative border-2 border-gray-700 border-dashed rounded-xl hover:border-gray-500 hover:bg-gray-700/10 transition-all duration-200 p-6 flex flex-col justify-center group overflow-hidden min-h-[120px]">
+                                <input type="file" id="doc_cv" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10 target-file" data-id="cv" required>
+                                
+                                <div id="placeholder-cv" class="text-center pointer-events-none transition-opacity">
+                                    <svg class="mx-auto h-8 w-8 text-gray-500 mb-2 group-hover:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                    <p class="text-sm text-gray-400 group-hover:text-gray-300">Pilih file atau drag ke sini</p>
+                                </div>
+
+                                <div id="preview-container-cv" class="hidden w-full items-center gap-4 pointer-events-none z-20">
+                                    <div class="w-14 h-14 shrink-0 bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center border border-gray-700 shadow-inner">
+                                        <img id="preview-img-cv" class="w-full h-full object-cover hidden" />
+                                        <span id="preview-icon-cv" class="text-sm font-bold text-gray-500 hidden"></span>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p id="preview-name-cv" class="text-sm text-gray-100 truncate font-medium"></p>
+                                        <p id="preview-size-cv" class="text-xs text-blue-400 mt-1"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-800">
+                        <button type="submit" class="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-all active:scale-[0.98]">
+                            Kirim Semua Dokumen
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // logic
+        document.querySelectorAll('.target-file').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                const id = e.target.dataset.id;
+                const placeholder = document.getElementById(`placeholder-${id}`);
+                const previewContainer = document.getElementById(`preview-container-${id}`);
+                const previewImg = document.getElementById(`preview-img-${id}`);
+                const previewIcon = document.getElementById(`preview-icon-${id}`);
+                const previewName = document.getElementById(`preview-name-${id}`);
+                const previewSize = document.getElementById(`preview-size-${id}`);
+                const statusBadge = document.getElementById(`status-${id}`);
+
+                if (file) {
+                    placeholder.classList.add('hidden');
+                    previewContainer.classList.remove('hidden');
+                    previewContainer.classList.add('flex');
+                    
+                    previewName.textContent = file.name;
+                    previewSize.textContent = `${(file.size / 1024).toFixed(1)} KB`;
+                    
+                    statusBadge.textContent = 'Siap Upload';
+                    statusBadge.className = 'text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-blue-900/50 text-blue-400 border border-blue-800/50';
+
+                    if (file.type.startsWith('image/')) {
+                        previewImg.src = URL.createObjectURL(file);
+                        previewImg.classList.remove('hidden');
+                        previewIcon.classList.add('hidden');
+                    } else {
+                        previewImg.classList.add('hidden');
+                        previewIcon.classList.remove('hidden');
+                        let ext = file.name.split('.').pop().substring(0,4).toUpperCase();
+                        previewIcon.textContent = ext || 'DOC';
+                    }
+                } else {
+                    // ide jelek tapi yaudah
+                    placeholder.classList.remove('hidden');
+                    previewContainer.classList.add('hidden');
+                    previewContainer.classList.remove('flex');
+                    
+                    statusBadge.textContent = 'Belum Ada';
+                    statusBadge.className = 'text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-gray-700 text-gray-400';
+                }
+            });
+        });
+
+        document.getElementById('uploadForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Upload progress...');
+        });
+    </script>
+</body>
+</html>

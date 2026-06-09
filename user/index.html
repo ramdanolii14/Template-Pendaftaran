@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { gray: { 900: '#121212', 800: '#1e1e1e', 850: '#181818' } } }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-200 flex h-screen font-sans antialiased overflow-hidden">
+    <aside class="w-64 bg-gray-850 border-r border-gray-800 flex flex-col shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-gray-800">
+            <h1 class="text-lg font-bold text-white tracking-wider">USER<span class="text-blue-500">PANEL</span></h1>
+        </div>
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <a href="#" class="block px-4 py-2.5 rounded-xl bg-blue-600/10 text-blue-400 font-medium transition-colors">Dashboard</a>
+            <a href="#" class="block px-4 py-2.5 rounded-xl text-gray-400 hover:bg-gray-800 hover:text-gray-200 transition-colors">Upload Dokumen</a>
+            <a href="#" class="block px-4 py-2.5 rounded-xl text-gray-400 hover:bg-gray-800 hover:text-gray-200 transition-colors">Pengaturan Akun</a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <header class="h-16 bg-gray-850/50 border-b border-gray-800 flex items-center justify-between px-8 backdrop-blur-sm z-10 shrink-0">
+            <h2 class="text-lg font-medium text-gray-100">Dashboard Peserta</h2>
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-gray-400">ID: 1029</span>
+                <div class="w-8 h-8 rounded-full bg-gray-700 border border-gray-600 flex items-center justify-center text-xs">U</div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8 space-y-8">
+            <div class="bg-gradient-to-r from-blue-900/40 to-gray-800 border border-blue-900/50 rounded-2xl p-8 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-20">
+                    <svg class="w-24 h-24 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-white mb-2">Selamat Datang!</h3>
+                <p class="text-gray-400 max-w-xl">Lengkapi profil dan unggah dokumen yang diperlukan untuk melanjutkan proses pendaftaran. Perhatikan format dan maksimal ukuran file.</p>
+                <div class="mt-6 flex items-center gap-4">
+                    <span class="px-3 py-1 bg-yellow-900/30 text-yellow-400 rounded-lg border border-yellow-900/50 text-sm font-medium">Status: Menunggu Upload</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gray-800 rounded-2xl border border-gray-800/50 shadow-sm p-6">
+                    <h3 class="text-lg font-medium text-white mb-6">Progress Dokumen</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl border border-gray-700 bg-gray-900/50 flex justify-between items-center group transition-all hover:border-gray-500">
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-200">Scan KTP / Paspor</h4>
+                                <p class="text-xs text-gray-500 mt-1">Belum diunggah</p>
+                            </div>
+                            <button class="px-3 py-1.5 bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white rounded-lg text-xs font-medium transition-all">Upload</button>
+                        </div>
+                        <div class="p-4 rounded-xl border border-gray-700 bg-gray-900/50 flex justify-between items-center group transition-all hover:border-gray-500">
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-200">Curriculum Vitae (CV)</h4>
+                                <p class="text-xs text-gray-500 mt-1">Belum diunggah</p>
+                            </div>
+                            <button class="px-3 py-1.5 bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white rounded-lg text-xs font-medium transition-all">Upload</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 rounded-2xl border border-gray-800/50 shadow-sm p-6">
+                    <h3 class="text-lg font-medium text-white mb-6">Informasi Akun</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between py-2 border-b border-gray-700/50">
+                            <span class="text-gray-500">User ID</span>
+                            <span class="text-gray-200 font-mono">1029</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-700/50">
+                            <span class="text-gray-500">Akun Taut</span>
+                            <span class="text-gray-200">Google OAuth</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-700/50">
+                            <span class="text-gray-500">Total Storage Terpakai</span>
+                            <span class="text-gray-200">0 KB / 15 MB</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-6 py-2 border border-gray-700 rounded-xl text-gray-400 hover:text-white hover:bg-gray-700 transition-all text-sm">Pengaturan Akun</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        console.log("User dashboard loaded");
+    </script>
+</body>
+</html>
